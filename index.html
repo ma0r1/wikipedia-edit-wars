@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wikipedia Edit Wars</title>
+<meta name="description" content="The most fought-over pages on English Wikipedia, every year since 2005. Search any page or browse a year.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%236250d6'/%3E%3Cpath d='M7 22l6-12 6 12 6-12' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <a class="kicker" href="#">English Wikipedia · 2005–2026</a>
+    <h1><a href="#">Where Wikipedia fights</a></h1>
+    <p class="lede">Behind some Wikipedia pages, editors keep undoing each other's changes. This site tracks those edit wars across English Wikipedia since 2005: <span id="lede-n">207,102</span> pages, ranked year by year by how heated the back-and-forth got. Look up a page you care about to see when it was fought over, or pick a year to see what everyone was arguing about.</p>
+    <div class="search">
+      <input id="q" type="search" placeholder="Look up a page, e.g. “Cristiano Ronaldo” or “Pluto”" autocomplete="off" spellcheck="false" aria-label="Look up a page" aria-controls="suggest" aria-expanded="false">
+      <ul id="suggest" class="suggest" role="listbox" hidden></ul>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="home">
+    <section id="winners" aria-labelledby="winners-h">
+      <div class="section-head">
+        <h2 id="winners-h">#1 every year</h2>
+        <p class="sub">The most fought-over page and the most fought-over person in each year. Click a year to see its top pages.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="winners">
+          <thead><tr><th>Year</th><th>Most fought-over page</th><th>Most fought-over person</th></tr></thead>
+          <tbody id="winners-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="browse" aria-labelledby="browse-h">
+      <div class="section-head">
+        <h2 id="browse-h">Browse a year</h2>
+        <p class="sub" id="browse-sub"></p>
+      </div>
+      <div class="controls">
+        <div class="stepper" role="group" aria-label="Year">
+          <button id="prev" type="button" aria-label="Previous year">‹</button>
+          <select id="year" aria-label="Year"></select>
+          <button id="next" type="button" aria-label="Next year">›</button>
+        </div>
+        <select id="kind" aria-label="Kind of page"></select>
+        <input id="filter" class="grow" type="search" placeholder="Filter titles…" aria-label="Filter titles">
+      </div>
+      <div class="table-wrap">
+        <table id="table">
+          <thead><tr><th class="num">Rank</th><th>Page</th><th class="hide-sm">Kind</th><th class="num">Score</th><th class="num hide-sm">Editors</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <button id="more" class="more" hidden>Show more</button>
+    </section>
+
+    <section id="method" aria-labelledby="method-h">
+      <div class="section-head"><h2 id="method-h">How the score works</h2></div>
+      <div class="prose">
+        <p>The score counts <strong>mutual reverts</strong>, pairs of editors who each undid the other's edits on the same page in the same year. Pairs of heavy editors count for more, and the score grows with the number of editors involved. It measures back-and-forth reverting, not who was right, whether a page is biased, or how many people read it.</p>
+        <details>
+          <summary>More about the method</summary>
+          <p>Each mutually reverting pair is weighted by the smaller of the two editors' edit counts on the page. The single heaviest pair is dropped, so that two people feuding alone don't top the list. The remaining total is multiplied by the number of editors involved in mutual reverts. Bots are excluded.</p>
+          <p>This is the “M” measure from Sumi, Yasseri, Rung, Kornai and Kertész (2011), which Yasseri and colleagues used in 2013 to rank Wikipedia's most controversial articles.</p>
+          <ul>
+            <li>Most pages never see an edit war: depending on the year, only 0.2% to 1.5% of edited pages score above zero. The site lists all <span id="n-page-years"></span> page-years with a score above zero. A page missing from a year had no edit war that year.</li>
+            <li>Pages with equal scores share a rank. Low scores are common, so many pages tie further down the list.</li>
+            <li>Pages are followed by their ID, so renames don't split a page's history. Titles shown are the current ones.</li>
+            <li>“Kind” is the page's Wikidata type today, and is missing for some pages.</li>
+            <li id="partial-note"></li>
+          </ul>
+        </details>
+        <p class="source">Data: Wikimedia edit-history dump (<span id="snap"></span>) and Wikidata. <a href="https://github.com/ma0r1/wikipedia-edit-wars">Code and data</a>.</p>
+      </div>
+    </section>
+  </div>
+
+  <section id="page-view" class="page-view" hidden aria-live="polite"></section>
+</main>
+
+<footer class="wrap foot">Not affiliated with Wikipedia or the Wikimedia Foundation.</footer>
+
+<script src="app.js?v=2"></script>
+</body>
+</html>
